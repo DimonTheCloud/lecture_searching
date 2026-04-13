@@ -45,6 +45,24 @@ def binary_search(sequence, target):
 
     return None
 
+def pattern_search(sequence, pattern):
+    positions = set()
+
+    seq_len = len(sequence)
+    pat_len = len(pattern)
+
+    for i in range(seq_len - pat_len + 1):
+        match = True
+
+        for j in range(pat_len):
+            if sequence[i + j] != pattern[j]:
+                match = False
+                break
+
+        if match:
+            positions.add(i)
+
+    return positions
 
 def set_membership(data_set, target):
     if target in data_set:
@@ -92,6 +110,14 @@ def measure_set_time(data_set, target, repeats=100):
 
 
 def main():
+    dna_data = read_data("sequential.json", "dna_sequence")
+    print(dna_data)
+
+    pattern = "ATA"
+    result = pattern_search(dna_data, pattern)
+    print(result)
+
+
     sizes = [100, 500, 1000, 5000, 10000]
 
     linear_times = []
